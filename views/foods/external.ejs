@@ -1,0 +1,160 @@
+<section class="mb-12">
+  <div class="glass-card premium-shadow rounded-[32px] p-10">
+
+    <p class="text-orange-500 font-bold uppercase tracking-[0.25em] text-sm">
+      External Food API
+    </p>
+
+    <h1 class="text-5xl font-extrabold text-gray-900 mt-3">
+      Global Food Explorer
+    </h1>
+
+    <p class="text-gray-500 mt-4 text-lg">
+      Search meals from a free public food API, plus Afghan food highlights.
+    </p>
+
+    <form method="GET" action="/external-foods" class="flex flex-col md:flex-row gap-4 mt-8">
+
+      <input
+        type="text"
+        name="search"
+        value="<%= search %>"
+        placeholder="Search external foods..."
+        class="input-luxury flex-1"
+      />
+
+      <button class="btn-luxury">
+        Search
+      </button>
+
+      <a href="/external-foods/random" class="btn-luxury text-center">
+        Random Meal
+      </a>
+
+    </form>
+
+  </div>
+</section>
+
+<section class="mb-14">
+
+  <h2 class="text-3xl font-extrabold text-gray-900 mb-6">
+    Afghan Food Highlights
+  </h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+    <% afghanFoods.forEach(food => { %>
+
+      <div class="glass-card premium-shadow rounded-[32px] overflow-hidden">
+
+        <img
+          src="<%= food.strMealThumb %>"
+          class="w-full h-56 object-cover"
+        />
+
+        <div class="p-6">
+
+          <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-bold">
+            <%= food.strArea %>
+          </span>
+
+          <h3 class="text-2xl font-extrabold text-gray-900 mt-4">
+            <%= food.strMeal %>
+          </h3>
+
+          <p class="text-gray-600 mt-3">
+            <%= food.strInstructions %>
+          </p>
+
+        </div>
+
+      </div>
+
+    <% }) %>
+
+  </div>
+
+</section>
+
+<section>
+
+  <h2 class="text-3xl font-extrabold text-gray-900 mb-6">
+    API Results
+  </h2>
+
+  <% if(meals.length === 0) { %>
+
+    <div class="glass-card premium-shadow rounded-[32px] p-12 text-center">
+
+      <h3 class="text-3xl font-extrabold text-gray-800">
+        No API meals found.
+      </h3>
+
+      <p class="text-gray-500 mt-4">
+        Try searching chicken, beef, rice, lamb, pasta, or dessert.
+      </p>
+
+    </div>
+
+  <% } else { %>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <% meals.forEach(meal => { %>
+
+        <div class="glass-card premium-shadow rounded-[32px] overflow-hidden">
+
+          <img
+            src="<%= meal.strMealThumb %>"
+            class="w-full h-56 object-cover"
+          />
+
+          <div class="p-6">
+
+            <div class="flex justify-between gap-3">
+
+              <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-bold">
+                <%= meal.strCategory || 'Meal' %>
+              </span>
+
+              <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm font-bold">
+                <%= meal.strArea || 'Global' %>
+              </span>
+
+            </div>
+
+            <h3 class="text-2xl font-extrabold text-gray-900 mt-4">
+              <%= meal.strMeal %>
+            </h3>
+
+            <p class="text-gray-600 mt-3">
+              <%= meal.strInstructions
+                ? meal.strInstructions.substring(0, 120) + '...'
+                : 'No instructions available.'
+              %>
+            </p>
+
+            <% if(meal.strYoutube) { %>
+
+              <a
+                href="<%= meal.strYoutube %>"
+                target="_blank"
+                class="inline-block mt-5 text-orange-600 font-extrabold hover:text-orange-700"
+              >
+                Watch Recipe Video
+              </a>
+
+            <% } %>
+
+          </div>
+
+        </div>
+
+      <% }) %>
+
+    </div>
+
+  <% } %>
+
+</section>
