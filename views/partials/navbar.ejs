@@ -1,0 +1,49 @@
+<nav class="luxury-dark text-white shadow-2xl sticky top-0 z-50">
+  <div class="container mx-auto px-6 py-5 flex flex-col md:flex-row justify-between items-center gap-4">
+
+    <a href="/dashboard" class="text-3xl font-extrabold tracking-tight">
+      <span class="text-orange-400">Food</span>Board
+    </a>
+
+    <div class="flex flex-wrap justify-center items-center gap-5 text-sm font-semibold">
+
+      <% if(user) { %>
+
+        <a href="/dashboard" class="hover:text-orange-400 transition">
+          Dashboard
+        </a>
+
+        <a href="/foods/new" class="hover:text-orange-400 transition">
+          Add Food
+        </a>
+
+        <% if(!user.isVerified) { %>
+          <a href="/verify-otp" class="text-yellow-300 hover:text-yellow-200 transition">
+            Verify Email
+          </a>
+        <% } %>
+
+        <a href="/external-foods" class="hover:text-orange-400 transition">
+          External Foods
+        </a>
+
+        <a href="/logout" class="text-red-300 hover:text-red-400 transition">
+          Logout
+        </a>
+
+      <% } else { %>
+
+        <a href="/login" class="hover:text-orange-400 transition">
+          Login
+        </a>
+
+        <a href="/register" class="bg-orange-500 hover:bg-orange-600 px-5 py-2 rounded-full transition">
+          Register
+        </a>
+
+      <% } %>
+
+    </div>
+
+  </div>
+</nav>
