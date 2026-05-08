@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
 
@@ -8,7 +8,7 @@
     content="width=device-width, initial-scale=1.0"
   />
 
-  <title>FoodBoard</title>
+  <title>FoodBoard — Luxury Restaurant System</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -18,15 +18,34 @@
   />
 </head>
 
-<body class="bg-gray-100 min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col">
 
   <%- include('../partials/navbar') %>
 
-  <main class="container mx-auto px-6 py-10 flex-1">
+  <main class="container mx-auto px-4 md:px-6 py-8 flex-1">
     <%- body %>
   </main>
 
   <%- include('../partials/footer') %>
+
+  <script>
+    const savedTheme = localStorage.getItem('foodboard-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('foodboard-theme', next);
+    }
+
+    window.addEventListener('load', function () {
+      document.querySelectorAll('.skeleton').forEach(function (el) {
+        el.classList.remove('skeleton');
+      });
+    });
+  </script>
 
 </body>
 </html>
