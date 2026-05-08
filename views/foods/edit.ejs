@@ -1,113 +1,90 @@
-<div class="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-lg">
+<div class="max-w-5xl mx-auto glass-card premium-shadow p-8 md:p-10 rounded-[38px]">
 
-  <h1 class="text-3xl font-bold mb-8 text-gray-800">
-    Edit Food
+  <p class="text-orange-600 font-black uppercase tracking-[0.25em] text-sm">
+    Menu Update
+  </p>
+
+  <h1 class="brand-font text-5xl font-black mt-3">
+    Edit Dish
   </h1>
 
-  <form
-    action="/foods/<%= food._id %>?_method=PUT"
-    method="POST"
-  >
+  <p class="text-gray-500 mt-3 mb-8">
+    Update dish information, visibility, status and premium menu flags.
+  </p>
 
-    <div class="mb-6">
+  <form action="/foods/<%= food._id %>?_method=PUT" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-      <label class="block mb-2 font-semibold">
-        Food Name
+    <div>
+      <label class="block mb-2 font-black">Dish Name</label>
+      <input type="text" name="name" value="<%= food.name %>" required class="input-luxury" />
+    </div>
+
+    <div>
+      <label class="block mb-2 font-black">Category</label>
+      <input type="text" name="category" value="<%= food.category %>" required class="input-luxury" />
+    </div>
+
+    <div>
+      <label class="block mb-2 font-black">Price AFN</label>
+      <input type="number" name="price" value="<%= food.price %>" min="0" required class="input-luxury" />
+    </div>
+
+    <div>
+      <label class="block mb-2 font-black">Cuisine</label>
+      <input type="text" name="cuisine" value="<%= food.cuisine %>" class="input-luxury" />
+    </div>
+
+    <div>
+      <label class="block mb-2 font-black">Preparation Time</label>
+      <input type="number" name="prepTime" value="<%= food.prepTime %>" min="1" class="input-luxury" />
+    </div>
+
+    <div>
+      <label class="block mb-2 font-black">Calories</label>
+      <input type="number" name="calories" value="<%= food.calories %>" min="0" class="input-luxury" />
+    </div>
+
+    <div>
+      <label class="block mb-2 font-black">Spice Level</label>
+      <select name="spiceLevel" class="input-luxury">
+        <option value="Mild" <%= food.spiceLevel === 'Mild' ? 'selected' : '' %>>Mild</option>
+        <option value="Medium" <%= food.spiceLevel === 'Medium' ? 'selected' : '' %>>Medium</option>
+        <option value="Spicy" <%= food.spiceLevel === 'Spicy' ? 'selected' : '' %>>Spicy</option>
+        <option value="Very Spicy" <%= food.spiceLevel === 'Very Spicy' ? 'selected' : '' %>>Very Spicy</option>
+      </select>
+    </div>
+
+    <div>
+      <label class="block mb-2 font-black">Image URL</label>
+      <input type="text" name="imageUrl" value="<%= food.imageUrl %>" class="input-luxury" />
+    </div>
+
+    <div class="md:col-span-2">
+      <label class="block mb-2 font-black">Description</label>
+      <textarea name="description" rows="5" required class="input-luxury"><%= food.description %></textarea>
+    </div>
+
+    <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-4">
+
+      <label class="glass-card rounded-2xl p-4 font-black flex items-center gap-3">
+        <input type="checkbox" name="availability" <%= food.availability ? 'checked' : '' %> />
+        Available
       </label>
 
-      <input
-        type="text"
-        name="name"
-        value="<%= food.name %>"
-        required
-        class="w-full border border-gray-300 rounded-lg px-4 py-3"
-      />
-
-    </div>
-
-    <div class="mb-6">
-
-      <label class="block mb-2 font-semibold">
-        Description
+      <label class="glass-card rounded-2xl p-4 font-black flex items-center gap-3">
+        <input type="checkbox" name="isFeatured" <%= food.isFeatured ? 'checked' : '' %> />
+        Featured Dish
       </label>
 
-      <textarea
-        name="description"
-        rows="5"
-        required
-        class="w-full border border-gray-300 rounded-lg px-4 py-3"
-      ><%= food.description %></textarea>
-
-    </div>
-
-    <div class="mb-6">
-
-      <label class="block mb-2 font-semibold">
-        Category
+      <label class="glass-card rounded-2xl p-4 font-black flex items-center gap-3">
+        <input type="checkbox" name="isTrending" <%= food.isTrending ? 'checked' : '' %> />
+        Trending Dish
       </label>
 
-      <input
-        type="text"
-        name="category"
-        value="<%= food.category %>"
-        required
-        class="w-full border border-gray-300 rounded-lg px-4 py-3"
-      />
-
     </div>
 
-    <div class="mb-6">
-
-      <label class="block mb-2 font-semibold">
-        Price
-      </label>
-
-      <input
-        type="number"
-        name="price"
-        value="<%= food.price %>"
-        required
-        class="w-full border border-gray-300 rounded-lg px-4 py-3"
-      />
-
-    </div>
-
-    <div class="mb-6">
-
-      <label class="block mb-2 font-semibold">
-        Image URL
-      </label>
-
-      <input
-        type="text"
-        name="imageUrl"
-        value="<%= food.imageUrl %>"
-        class="w-full border border-gray-300 rounded-lg px-4 py-3"
-      />
-
-    </div>
-
-    <div class="mb-6">
-
-        <label class="flex items-center gap-3">
-
-            <input
-            type="checkbox"
-            name="availability"
-
-            <%= food.availability ? 'checked' : '' %>
-            />
-
-            Available
-
-        </label>
-
-    </div>
-
-    <button
-      class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg w-full"
-    >
-      Update Food
+    <button class="btn-luxury md:col-span-2">
+      Update Dish
     </button>
 
   </form>
