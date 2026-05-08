@@ -1,20 +1,28 @@
 <nav class="luxury-dark text-white shadow-2xl sticky top-0 z-50">
-  <div class="container mx-auto px-6 py-5 flex flex-col md:flex-row justify-between items-center gap-4">
+  <div class="container mx-auto px-4 md:px-6 py-5 flex flex-col md:flex-row justify-between items-center gap-4">
 
-    <a href="/dashboard" class="text-3xl font-extrabold tracking-tight">
-      <span class="text-orange-400">Food</span>Board
+    <a href="/dashboard" class="brand-font text-4xl font-black tracking-tight">
+      <span class="text-amber-300">Food</span>Board
     </a>
 
-    <div class="flex flex-wrap justify-center items-center gap-5 text-sm font-semibold">
+    <div class="flex flex-wrap justify-center items-center gap-4 text-sm font-black">
 
       <% if(user) { %>
 
-        <a href="/dashboard" class="hover:text-orange-400 transition">
+        <a href="/dashboard" class="hover:text-amber-300 transition">
           Dashboard
         </a>
 
-        <a href="/foods/new" class="hover:text-orange-400 transition">
-          Add Food
+        <a href="/restaurant-profile" class="hover:text-amber-300 transition">
+          Restaurant Profile
+        </a>
+
+        <a href="/foods/new" class="hover:text-amber-300 transition">
+          Add Dish
+        </a>
+
+        <a href="/external-foods" class="hover:text-amber-300 transition">
+          Food Explorer
         </a>
 
         <% if(!user.isVerified) { %>
@@ -23,9 +31,12 @@
           </a>
         <% } %>
 
-        <a href="/external-foods" class="hover:text-orange-400 transition">
-          External Foods
-        </a>
+        <button
+          onclick="toggleTheme()"
+          class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full transition"
+        >
+          Theme
+        </button>
 
         <a href="/logout" class="text-red-300 hover:text-red-400 transition">
           Logout
@@ -33,11 +44,11 @@
 
       <% } else { %>
 
-        <a href="/login" class="hover:text-orange-400 transition">
+        <a href="/login" class="hover:text-amber-300 transition">
           Login
         </a>
 
-        <a href="/register" class="bg-orange-500 hover:bg-orange-600 px-5 py-2 rounded-full transition">
+        <a href="/register" class="bg-amber-500 hover:bg-amber-600 px-5 py-2 rounded-full transition">
           Register
         </a>
 
