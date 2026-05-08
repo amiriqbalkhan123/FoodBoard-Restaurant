@@ -1,83 +1,139 @@
-<div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
+<div class="max-w-6xl mx-auto">
 
-  <img
-    src="<%= food.imageUrl || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c' %>"
-    class="w-full h-96 object-cover"
-  />
+  <div class="glass-card premium-shadow rounded-[42px] overflow-hidden">
 
-  <div class="p-8">
+    <div class="relative">
 
-    <div class="flex justify-between items-center">
+      <img
+        src="<%= food.imageUrl && food.imageUrl.trim() !== '' ? food.imageUrl : 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c' %>"
+        class="w-full h-[460px] object-cover skeleton"
+      />
 
-      <h1 class="text-4xl font-bold text-gray-800">
-        <%= food.name %>
-      </h1>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
-      <span
-        class="bg-orange-100 text-orange-600 px-4 py-2 rounded-full"
-      >
-        <%= food.category %>
-      </span>
+      <div class="absolute bottom-8 left-8 right-8 text-white">
 
-    </div>
+        <div class="flex flex-wrap gap-3 mb-5">
 
-    <p class="text-gray-600 mt-6 text-lg">
-      <%= food.description %>
-    </p>
+          <span class="badge <%= food.availability ? 'badge-green' : 'badge-red' %>">
+            <%= food.availability ? 'Available' : 'Unavailable' %>
+          </span>
 
-    <div class="mt-8 flex justify-between items-center">
+          <% if(food.isFeatured) { %>
+            <span class="badge badge-gold">Featured</span>
+          <% } %>
 
-      <span class="text-4xl font-bold text-orange-500">
-        AFN <%= food.price %>
-      </span>
+          <% if(food.isTrending) { %>
+            <span class="badge bg-orange-500 text-white">Trending</span>
+          <% } %>
 
-      <% if(food.availability) { %>
+        </div>
 
-        <span
-          class="bg-green-100 text-green-600 px-4 py-2 rounded-full"
-        >
-          Available
-        </span>
+        <h1 class="brand-font text-6xl font-black">
+          <%= food.name %>
+        </h1>
 
-      <% } else { %>
+        <p class="text-orange-100 mt-3 text-lg">
+          <%= food.cuisine %> • <%= food.category %>
+        </p>
 
-        <span
-          class="bg-red-100 text-red-600 px-4 py-2 rounded-full"
-        >
-          Not Available
-        </span>
-
-      <% } %>
+      </div>
 
     </div>
 
-    <% if(user) { %>
+    <div class="p-8 md:p-10">
 
-      <div class="flex gap-4 mt-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-8">
 
-        <a
-          href="/foods/edit/<%= food._id %>"
-          class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg"
-        >
-          Edit
-        </a>
+        <div class="bg-white rounded-3xl p-6 shadow">
+          <p class="text-gray-400 font-bold">Price</p>
+          <h3 class="text-3xl font-black text-orange-600 mt-2">
+            AFN <%= food.price %>
+          </h3>
+        </div>
 
-        <form
-          action="/foods/<%= food._id %>?_method=DELETE"
-          method="POST"
-        >
+        <div class="bg-white rounded-3xl p-6 shadow">
+          <p class="text-gray-400 font-bold">Rating</p>
+          <h3 class="text-3xl font-black mt-2">
+            ⭐ <%= food.ratingAverage || 0 %>
+          </h3>
+        </div>
 
-          <button
-            class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg"
-          >
-            Delete
+        <div class="bg-white rounded-3xl p-6 shadow">
+          <p class="text-gray-400 font-bold">Prep Time</p>
+          <h3 class="text-3xl font-black mt-2">
+            <%= food.prepTime %>m
+          </h3>
+        </div>
+
+        <div class="bg-white rounded-3xl p-6 shadow">
+          <p class="text-gray-400 font-bold">Spice</p>
+          <h3 class="text-2xl font-black mt-2">
+            <%= food.spiceLevel %>
+          </h3>
+        </div>
+
+      </div>
+
+      <div class="bg-white rounded-[32px] p-7 shadow mb-8">
+        <p class="text-orange-600 font-black uppercase tracking-[0.25em] text-sm">
+          Dish Story
+        </p>
+
+        <p class="text-gray-700 mt-4 text-lg leading-relaxed">
+          <%= food.description %>
+        </p>
+      </div>
+
+      <div class="glass-card rounded-[32px] p-7 mb-8">
+
+        <h2 class="brand-font text-3xl font-black mb-5">
+          Rate This Dish
+        </h2>
+
+        <form action="/foods/<%= food._id %>/rate" method="POST" class="flex flex-col md:flex-row gap-4">
+
+          <select name="rating" class="input-luxury">
+            <option value="5">5 Stars — Excellent</option>
+            <option value="4">4 Stars — Very Good</option>
+            <option value="3">3 Stars — Good</option>
+            <option value="2">2 Stars — Average</option>
+            <option value="1">1 Star — Poor</option>
+          </select>
+
+          <button class="btn-luxury">
+            Submit Rating
           </button>
 
         </form>
 
       </div>
 
-    <% } %>
+      <div class="flex flex-wrap gap-4">
+
+        <a href="/foods/edit/<%= food._id %>" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-2xl font-black">
+          Edit Dish
+        </a>
+
+        <form action="/foods/<%= food._id %>/favorite" method="POST">
+          <button class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-2xl font-black">
+            <%= food.isFavorite ? 'Remove Favorite' : 'Add Favorite' %>
+          </button>
+        </form>
+
+        <form action="/foods/<%= food._id %>?_method=DELETE" method="POST">
+          <button class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-2xl font-black">
+            Delete
+          </button>
+        </form>
+
+        <a href="/dashboard" class="bg-gray-900 hover:bg-black text-white px-6 py-3 rounded-2xl font-black">
+          Back
+        </a>
+
+      </div>
+
+    </div>
 
   </div>
 
