@@ -1,105 +1,90 @@
-<div class="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-lg">
+<div class="max-w-5xl mx-auto glass-card premium-shadow p-8 md:p-10 rounded-[38px]">
 
-  <h1 class="text-3xl font-bold mb-8 text-gray-800">
-    Add Food
+  <p class="text-orange-600 font-black uppercase tracking-[0.25em] text-sm">
+    Menu Creation
+  </p>
+
+  <h1 class="brand-font text-5xl font-black mt-3">
+    Add Premium Dish
   </h1>
 
-  <form action="/foods" method="POST">
+  <p class="text-gray-500 mt-3 mb-8">
+    Create a luxury restaurant menu item with category, rating-ready features, availability and branding flags.
+  </p>
 
-    <div class="mb-6">
+  <form action="/foods" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-      <label class="block mb-2 font-semibold">
-        Food Name
-      </label>
-
-      <input
-        type="text"
-        name="name"
-        required
-        class="w-full border border-gray-300 rounded-lg px-4 py-3"
-      />
-
+    <div>
+      <label class="block mb-2 font-black">Dish Name</label>
+      <input type="text" name="name" required class="input-luxury" />
     </div>
 
-    <div class="mb-6">
-
-      <label class="block mb-2 font-semibold">
-        Description
-      </label>
-
-      <textarea
-        name="description"
-        rows="5"
-        required
-        class="w-full border border-gray-300 rounded-lg px-4 py-3"
-      ></textarea>
-
+    <div>
+      <label class="block mb-2 font-black">Category</label>
+      <input type="text" name="category" required placeholder="Afghan, Dessert, Drinks..." class="input-luxury" />
     </div>
 
-    <div class="mb-6">
-
-      <label class="block mb-2 font-semibold">
-        Category
-      </label>
-
-      <input
-        type="text"
-        name="category"
-        required
-        class="w-full border border-gray-300 rounded-lg px-4 py-3"
-      />
-
+    <div>
+      <label class="block mb-2 font-black">Price AFN</label>
+      <input type="number" name="price" min="0" required class="input-luxury" />
     </div>
 
-    <div class="mb-6">
-
-      <label class="block mb-2 font-semibold">
-        Price
-      </label>
-
-      <input
-        type="number"
-        name="price"
-        required
-        class="w-full border border-gray-300 rounded-lg px-4 py-3"
-      />
-
+    <div>
+      <label class="block mb-2 font-black">Cuisine</label>
+      <input type="text" name="cuisine" value="Afghan" class="input-luxury" />
     </div>
 
-    <div class="mb-6">
-
-      <label class="block mb-2 font-semibold">
-        Image URL
-      </label>
-
-      <input
-        type="text"
-        name="imageUrl"
-        class="w-full border border-gray-300 rounded-lg px-4 py-3"
-      />
-
+    <div>
+      <label class="block mb-2 font-black">Preparation Time</label>
+      <input type="number" name="prepTime" value="20" min="1" class="input-luxury" />
     </div>
 
-    <div class="mb-6">
+    <div>
+      <label class="block mb-2 font-black">Calories</label>
+      <input type="number" name="calories" value="0" min="0" class="input-luxury" />
+    </div>
 
-      <label class="flex items-center gap-3">
+    <div>
+      <label class="block mb-2 font-black">Spice Level</label>
+      <select name="spiceLevel" class="input-luxury">
+        <option value="Mild">Mild</option>
+        <option value="Medium" selected>Medium</option>
+        <option value="Spicy">Spicy</option>
+        <option value="Very Spicy">Very Spicy</option>
+      </select>
+    </div>
 
-        <input
-          type="checkbox"
-          name="availability"
-          checked
-        />
+    <div>
+      <label class="block mb-2 font-black">Image URL</label>
+      <input type="text" name="imageUrl" class="input-luxury" />
+    </div>
 
+    <div class="md:col-span-2">
+      <label class="block mb-2 font-black">Description</label>
+      <textarea name="description" rows="5" required class="input-luxury"></textarea>
+    </div>
+
+    <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-4">
+
+      <label class="glass-card rounded-2xl p-4 font-black flex items-center gap-3">
+        <input type="checkbox" name="availability" checked />
         Available
+      </label>
 
+      <label class="glass-card rounded-2xl p-4 font-black flex items-center gap-3">
+        <input type="checkbox" name="isFeatured" />
+        Featured Dish
+      </label>
+
+      <label class="glass-card rounded-2xl p-4 font-black flex items-center gap-3">
+        <input type="checkbox" name="isTrending" />
+        Trending Dish
       </label>
 
     </div>
 
-    <button
-      class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg w-full"
-    >
-      Create Food
+    <button class="btn-luxury md:col-span-2">
+      Save Premium Dish
     </button>
 
   </form>
