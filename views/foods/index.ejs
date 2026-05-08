@@ -1,139 +1,309 @@
-<section class="mb-12">
-  <div class="glass-card premium-shadow rounded-[32px] p-10">
+<section class="mb-10 float-in">
+  <div class="luxury-dark hero-pattern text-white rounded-[42px] p-8 md:p-12 premium-shadow persian-frame overflow-hidden">
 
-    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
 
       <div>
-        <p class="text-orange-500 font-bold uppercase tracking-[0.25em] text-sm">
-          Premium Restaurant Menu
+        <p class="text-amber-300 font-black uppercase tracking-[0.35em] text-sm">
+          Afghan Luxury Dining Platform
         </p>
 
-        <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 mt-3">
-          Food Menu
+        <h1 class="brand-font text-6xl md:text-7xl font-black mt-5 leading-tight">
+          Restaurant Menu Command Center
         </h1>
 
-        <p class="text-gray-500 mt-4 text-lg max-w-2xl">
-          Explore delicious meals, manage availability, and present your restaurant menu beautifully.
+        <p class="text-orange-100 mt-6 text-lg max-w-2xl">
+          Manage dishes, ratings, availability, featured menus, trending meals, and restaurant analytics from one premium dashboard.
         </p>
+
+        <div class="flex flex-wrap gap-4 mt-8">
+          <a href="/foods/new" class="btn-luxury">
+            + Add New Dish
+          </a>
+
+          <a href="/external-foods" class="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-2xl font-black transition">
+            Explore Global Foods
+          </a>
+        </div>
       </div>
 
-      <% if(user) { %>
-        <a href="/foods/new" class="btn-luxury">
-          + Add Food
-        </a>
-      <% } %>
+      <div class="glass-card rounded-[34px] p-6 text-gray-900 premium-shadow">
+        <p class="text-sm font-black text-orange-600 uppercase tracking-[0.25em]">
+          Live Restaurant Overview
+        </p>
+
+        <div class="grid grid-cols-2 gap-4 mt-6">
+
+          <div class="bg-white rounded-3xl p-5 shadow">
+            <p class="text-gray-500 font-bold">Total Dishes</p>
+            <h2 class="text-4xl font-black mt-2"><%= stats.totalFoods %></h2>
+          </div>
+
+          <div class="bg-white rounded-3xl p-5 shadow">
+            <p class="text-gray-500 font-bold">Available</p>
+            <h2 class="text-4xl font-black mt-2 text-green-600"><%= stats.availableFoods %></h2>
+          </div>
+
+          <div class="bg-white rounded-3xl p-5 shadow">
+            <p class="text-gray-500 font-bold">Featured</p>
+            <h2 class="text-4xl font-black mt-2 text-amber-600"><%= stats.featuredCount %></h2>
+          </div>
+
+          <div class="bg-white rounded-3xl p-5 shadow">
+            <p class="text-gray-500 font-bold">Favorites</p>
+            <h2 class="text-4xl font-black mt-2 text-red-500"><%= stats.favoriteFoods %></h2>
+          </div>
+
+        </div>
+      </div>
 
     </div>
-
-    <form method="GET" action="/dashboard" class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
-
-      <input
-        type="text"
-        name="search"
-        value="<%= search %>"
-        placeholder="Search food by name..."
-        class="input-luxury md:col-span-2"
-      />
-
-      <select name="category" class="input-luxury">
-        <option value="All">All Categories</option>
-
-        <% categories.forEach(cat => { %>
-          <option value="<%= cat %>" <%= selectedCategory === cat ? 'selected' : '' %>>
-            <%= cat %>
-          </option>
-        <% }) %>
-      </select>
-
-      <button class="btn-luxury md:col-span-3">
-        Search Menu
-      </button>
-
-    </form>
 
   </div>
 </section>
 
+<section class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-6 gap-5 mb-10">
 
-<% if(foods.length === 0) { %>
-
-  <div class="glass-card premium-shadow rounded-[32px] p-16 text-center">
-
-    <h2 class="text-4xl font-extrabold text-gray-800">
-      No Foods Found
-    </h2>
-
-    <p class="text-gray-500 mt-4 text-lg">
-      Try another search or add your first food item.
-    </p>
-
-    <% if(user) { %>
-      <a href="/foods/new" class="inline-block mt-8 btn-luxury">
-        Add First Food
-      </a>
-    <% } %>
-
+  <div class="glass-card premium-shadow rounded-[28px] p-5">
+    <p class="text-sm font-black text-gray-500">Unavailable</p>
+    <h2 class="text-3xl font-black mt-2 text-red-500"><%= stats.unavailableFoods %></h2>
   </div>
 
-<% } else { %>
+  <div class="glass-card premium-shadow rounded-[28px] p-5">
+    <p class="text-sm font-black text-gray-500">Trending</p>
+    <h2 class="text-3xl font-black mt-2 text-orange-500"><%= stats.trendingCount %></h2>
+  </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+  <div class="glass-card premium-shadow rounded-[28px] p-5">
+    <p class="text-sm font-black text-gray-500">Categories</p>
+    <h2 class="text-3xl font-black mt-2"><%= categories.length %></h2>
+  </div>
 
-    <% foods.forEach(food => { %>
+  <div class="glass-card premium-shadow rounded-[28px] p-5 md:col-span-3">
+    <p class="text-sm font-black text-gray-500">Brand Identity</p>
+    <h2 class="brand-font text-3xl font-black mt-2 text-orange-600">Premium Afghan Dining</h2>
+  </div>
 
-      <div class="glass-card premium-shadow rounded-[32px] overflow-hidden hover:-translate-y-2 transition duration-300">
+</section>
 
-        <div class="relative">
+<section class="glass-card premium-shadow rounded-[34px] p-6 md:p-8 mb-10">
 
-          <img
-            src="<%= food.imageUrl && food.imageUrl.trim() !== '' ? food.imageUrl : 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c' %>"
-            class="w-full h-64 object-cover"
-          />
+  <form method="GET" action="/dashboard" class="grid grid-cols-1 md:grid-cols-5 gap-4">
 
-          <% if(food.availability) { %>
-            <span class="absolute top-4 right-4 bg-green-500 text-white px-4 py-1 rounded-full text-sm shadow-lg">
-              Available
-            </span>
-          <% } else { %>
-            <span class="absolute top-4 right-4 bg-red-500 text-white px-4 py-1 rounded-full text-sm shadow-lg">
-              Unavailable
-            </span>
-          <% } %>
+    <input
+      type="text"
+      name="search"
+      value="<%= search %>"
+      placeholder="Search dishes, cuisine or description..."
+      class="input-luxury md:col-span-2"
+    />
 
-        </div>
+    <select name="category" class="input-luxury">
+      <option value="All">All Categories</option>
 
-        <div class="p-7">
+      <% categories.forEach(cat => { %>
+        <option value="<%= cat %>" <%= selectedCategory === cat ? 'selected' : '' %>>
+          <%= cat %>
+        </option>
+      <% }) %>
+    </select>
 
-          <div class="flex justify-between items-start gap-4">
-            <h2 class="text-2xl font-extrabold text-gray-900">
-              <%= food.name %>
-            </h2>
+    <select name="availability" class="input-luxury">
+      <option value="All">All Availability</option>
+      <option value="Available" <%= selectedAvailability === 'Available' ? 'selected' : '' %>>Available</option>
+      <option value="Unavailable" <%= selectedAvailability === 'Unavailable' ? 'selected' : '' %>>Unavailable</option>
+    </select>
 
-            <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm whitespace-nowrap font-semibold">
-              <%= food.category %>
-            </span>
+    <select name="sort" class="input-luxury">
+      <option value="newest" <%= selectedSort === 'newest' ? 'selected' : '' %>>Newest</option>
+      <option value="priceLow" <%= selectedSort === 'priceLow' ? 'selected' : '' %>>Price Low</option>
+      <option value="priceHigh" <%= selectedSort === 'priceHigh' ? 'selected' : '' %>>Price High</option>
+      <option value="rating" <%= selectedSort === 'rating' ? 'selected' : '' %>>Top Rated</option>
+    </select>
+
+    <button class="btn-luxury md:col-span-5">
+      Search & Filter Menu
+    </button>
+
+  </form>
+
+</section>
+
+<% if(featuredFoods.length > 0) { %>
+
+<section class="mb-12">
+  <div class="flex justify-between items-center mb-5">
+    <h2 class="brand-font text-4xl font-black">Featured Dishes</h2>
+    <span class="badge badge-gold">Chef Selection</span>
+  </div>
+
+  <div class="carousel-row">
+
+    <% featuredFoods.forEach(food => { %>
+
+      <div class="carousel-card glass-card premium-shadow rounded-[32px] overflow-hidden card-hover">
+        <img
+          src="<%= food.imageUrl && food.imageUrl.trim() !== '' ? food.imageUrl : 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c' %>"
+          class="w-full h-52 object-cover skeleton"
+        />
+
+        <div class="p-6">
+          <h3 class="text-2xl font-black"><%= food.name %></h3>
+          <p class="text-gray-500 mt-2"><%= food.category %></p>
+
+          <div class="flex justify-between items-center mt-5">
+            <span class="text-2xl font-black text-orange-600">AFN <%= food.price %></span>
+            <a href="/foods/<%= food._id %>" class="btn-luxury">View</a>
           </div>
-
-          <p class="text-gray-600 mt-4 leading-relaxed">
-            <%= food.description.length > 100 ? food.description.substring(0, 100) + '...' : food.description %>
-          </p>
-
-          <div class="flex justify-between items-center mt-8">
-            <span class="text-3xl font-extrabold text-orange-500">
-              AFN <%= food.price %>
-            </span>
-
-            <a href="/foods/<%= food._id %>" class="btn-luxury">
-              View
-            </a>
-          </div>
-
         </div>
-
       </div>
 
     <% }) %>
 
   </div>
+</section>
 
 <% } %>
+
+<% if(trendingFoods.length > 0) { %>
+
+<section class="mb-12">
+  <div class="flex justify-between items-center mb-5">
+    <h2 class="brand-font text-4xl font-black">Trending Now</h2>
+    <span class="badge badge-gold">Hot Picks</span>
+  </div>
+
+  <div class="carousel-row">
+
+    <% trendingFoods.forEach(food => { %>
+
+      <div class="carousel-card glass-card premium-shadow rounded-[32px] overflow-hidden card-hover">
+        <img
+          src="<%= food.imageUrl && food.imageUrl.trim() !== '' ? food.imageUrl : 'https://images.unsplash.com/photo-1603133872878-684f208fb84b' %>"
+          class="w-full h-52 object-cover skeleton"
+        />
+
+        <div class="p-6">
+          <h3 class="text-2xl font-black"><%= food.name %></h3>
+          <p class="text-gray-500 mt-2">Rating: ⭐ <%= food.ratingAverage || 0 %></p>
+
+          <div class="flex justify-between items-center mt-5">
+            <span class="text-2xl font-black text-orange-600">AFN <%= food.price %></span>
+            <a href="/foods/<%= food._id %>" class="btn-luxury">View</a>
+          </div>
+        </div>
+      </div>
+
+    <% }) %>
+
+  </div>
+</section>
+
+<% } %>
+
+<section>
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="brand-font text-4xl font-black">Complete Menu</h2>
+    <p class="text-gray-500 font-bold"><%= foods.length %> results</p>
+  </div>
+
+  <% if(foods.length === 0) { %>
+
+    <div class="glass-card premium-shadow rounded-[36px] p-16 text-center">
+      <h2 class="brand-font text-5xl font-black">No Dishes Found</h2>
+      <p class="text-gray-500 mt-4 text-lg">
+        Try changing filters or add your first premium dish.
+      </p>
+
+      <a href="/foods/new" class="inline-block mt-8 btn-luxury">
+        Add First Dish
+      </a>
+    </div>
+
+  <% } else { %>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+
+      <% foods.forEach(food => { %>
+
+        <div class="glass-card premium-shadow rounded-[34px] overflow-hidden card-hover">
+
+          <div class="relative">
+
+            <img
+              src="<%= food.imageUrl && food.imageUrl.trim() !== '' ? food.imageUrl : 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c' %>"
+              class="w-full h-64 object-cover skeleton"
+            />
+
+            <div class="absolute top-4 left-4 flex gap-2">
+              <% if(food.isFeatured) { %>
+                <span class="badge badge-gold">Featured</span>
+              <% } %>
+
+              <% if(food.isTrending) { %>
+                <span class="badge bg-orange-500 text-white">Trending</span>
+              <% } %>
+            </div>
+
+            <span class="absolute top-4 right-4 badge <%= food.availability ? 'badge-green' : 'badge-red' %>">
+              <%= food.availability ? 'Available' : 'Unavailable' %>
+            </span>
+
+          </div>
+
+          <div class="p-7">
+
+            <div class="flex justify-between items-start gap-4">
+              <div>
+                <h3 class="text-2xl font-black"><%= food.name %></h3>
+                <p class="text-gray-500 mt-1"><%= food.cuisine %> • <%= food.category %></p>
+              </div>
+
+              <form action="/foods/<%= food._id %>/favorite" method="POST">
+                <button class="text-3xl">
+                  <%= food.isFavorite ? '♥' : '♡' %>
+                </button>
+              </form>
+            </div>
+
+            <p class="text-gray-600 mt-4 leading-relaxed">
+              <%= food.description.length > 105 ? food.description.substring(0, 105) + '...' : food.description %>
+            </p>
+
+            <div class="grid grid-cols-3 gap-3 mt-5 text-center">
+              <div class="bg-white rounded-2xl p-3">
+                <p class="text-xs text-gray-400 font-bold">Rating</p>
+                <p class="font-black">⭐ <%= food.ratingAverage || 0 %></p>
+              </div>
+
+              <div class="bg-white rounded-2xl p-3">
+                <p class="text-xs text-gray-400 font-bold">Time</p>
+                <p class="font-black"><%= food.prepTime %>m</p>
+              </div>
+
+              <div class="bg-white rounded-2xl p-3">
+                <p class="text-xs text-gray-400 font-bold">Spice</p>
+                <p class="font-black"><%= food.spiceLevel %></p>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center mt-7">
+              <span class="text-3xl font-black text-orange-600">
+                AFN <%= food.price %>
+              </span>
+
+              <a href="/foods/<%= food._id %>" class="btn-luxury">
+                Details
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+      <% }) %>
+
+    </div>
+
+  <% } %>
+</section>
